@@ -1,0 +1,251 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.18.0",
+      "toolsId": "9a62dac6-2ba9-496e-9f25-b1188f014a05"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/my/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.139.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project1.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ConfigProductsList",
+          "target": [
+            "ConfigProductsList"
+          ]
+        },
+        {
+          "pattern": "ConfigProducts({key}):?query:",
+          "name": "ConfigProductsObjectPage",
+          "target": [
+            "ConfigProductsList",
+            "ConfigProductsObjectPage"
+          ]
+        },
+        {
+          "pattern": "ConfigProducts({key})/Product({key2}):?query:",
+          "name": "ProductObjectPage",
+          "target": [
+            "ConfigProductsList",
+            "ConfigProductsObjectPage",
+            "ProductObjectPage"
+          ]
+        }
+      ],
+      "targets": {
+        "MainCustomPage": {
+          "type": "View",
+          "id": "MainCustomPage",
+          "name": "project1.ext.main.Main"
+        },
+        "ConfigProductsList": {
+          "type": "Component",
+          "id": "ConfigProductsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "showObjectPageHeader": false,
+              "contextPath": "/ConfigProducts",
+              "variantManagement": "Page",
+              "navigation": {
+                "ConfigProducts": {
+                  "detail": {
+                    "route": "ConfigProductsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
+        },
+        "ConfigProductsObjectPage": {
+          "type": "Component",
+          "id": "ConfigProductsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/ConfigProducts",
+              "navigation": {
+                "Product": {
+                  "detail": {
+                    "route": "ProductObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "Product/@com.sap.vocabularies.UI.v1.LineItem#Needs": {
+                  "actions": {
+                    "ActionTest": {
+                      "press": "project1.ext.controller.ActionTestHandler.actionTestHandler",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "ActionTest1"
+                    }
+                  }
+                }
+              },
+              "editableHeaderContent": false,
+              "content": {
+                "header": {
+                  "visible": false,
+                  "anchorBarVisible": true
+                }
+              }
+            }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/ConfigProducts({key})"
+        },
+        "ProductObjectPage": {
+          "type": "Component",
+          "id": "ProductObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ConfigProducts/Product"
+            }
+          },
+          "controlAggregation": "endColumnPages",
+          "contextPattern": "/ConfigProducts({key})/Product({key2})"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
+    },
+     "extends": {
+      "extensions": {
+        "sap.ui.commands": {
+          "sap.fe.templates.ListReport": {
+            "activateActionCommandListReport": {
+              "shortcut": "Shift+A"
+            },
+            "deactivateActionCommandListReport": {
+              "shortcut": "Shift+D"
+            },
+            "syncDescActionCommandListReport": {
+              "shortcut": "Shift+S"
+            }
+          },
+          "sap.fe.templates.ObjectPage": {
+            "activateActionCommandObjectPage": {
+              "shortcut": "Shift+A"
+            },
+            "deactivateActionCommandObjectPage": {
+              "shortcut": "Shift+D"
+            },
+            "syncDescActionCommandObjectPage": {
+              "shortcut": "Shift+S"
+            }
+          }
+        },
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ObjectPage.ObjectPageController": {
+            "controllerName": "project1.ext.controller.create"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
