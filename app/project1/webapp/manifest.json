@@ -175,6 +175,29 @@
                       "text": "ActionTest1"
                     }
                   }
+                },
+                "@com.sap.vocabularies.UI.v1.FieldGroup#EvalConditions": {
+                  "actions": {
+                    "PasteButtonEnabled": {
+                      "press": "project1.ext.controller.PasteButtonEnabled.PasteButtonEnabled",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Paste",
+                      "position": {
+                        "placement": "After"
+                      }
+                    },
+                    "ClearTextAction": {
+                      "press": "project1.ext.controller.PasteButtonEnabled.ClearTextAction",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Clear Text",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "PasteButtonEnabled"
+                      }
+                    }
+                  }
                 }
               },
               "editableHeaderContent": false,
@@ -210,7 +233,7 @@
       "async": true,
       "id": "appRootView"
     },
-     "extends": {
+    "extends": {
       "extensions": {
         "sap.ui.commands": {
           "sap.fe.templates.ListReport": {

@@ -102,6 +102,7 @@ annotate service.ConfigProducts with @(
             Value : createdAt,
         },
     ],
+    UI.DeleteHidden : true,
     );
 
 
