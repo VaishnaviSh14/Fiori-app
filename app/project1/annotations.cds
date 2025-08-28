@@ -10,17 +10,16 @@ annotate service.ConfigProducts with @(
     ],
      UI.FieldGroup #GeneralInfo : {
         Data : [
-            { $Type : 'UI.DataField', Value : Name,        Label : '{i18n>Name}', Placeholder : 'Enter Name' },
+            { $Type : 'UI.DataField', Value : Name,        Label : '{i18n>Name}' },
             { $Type : 'UI.DataField', Value : Description, Label : '{i18n>Description}' },
             { $Type : 'UI.DataField', Value : Type,        Label : '{i18n>Type}' },
             { $Type : 'UI.DataField', Value : Category,    Label : '{i18n>Category}' },
             { $Type : 'UI.DataField', Value : Priority,    Label : '{i18n>Criticality}' },
         ]
     },
-
-    UI.FieldGroup #EvalConditions : {
+    UI.FieldGroup #EvaluationConditions : {
         Data : [
-            { $Type : 'UI.DataField', Value : EvalConditions, Label : '{i18n>EvalConditions}' }
+            { $Type : 'UI.DataField', Value : EvaluationConditions, }
         ]
     },
     UI.FieldGroup #GeneratedGroup : {
@@ -67,9 +66,10 @@ annotate service.ConfigProducts with @(
         {
             $Type  : 'UI.ReferenceFacet',
             Label  : '{i18n>EvaluationConditions}',
-            Target : '@UI.FieldGroup#EvalConditions'
+            Target : '@UI.FieldGroup#EvaluationConditions'
         }
     ],
+    
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
@@ -107,7 +107,7 @@ annotate service.ConfigProducts with @(
 
 
 annotate service.ConfigProducts with {
-    EvalConditions @UI.MultiLineText : true
+    EvaluationConditions @UI.MultiLineText : true
 };
 
 annotate MyService.ConfigProducts with {
@@ -116,7 +116,7 @@ annotate MyService.ConfigProducts with {
   Priority @UI.Placeholder: '{i18n>Select}';
   Description @UI.Placeholder: '{i18n>Enter a Description}'  @(Common.FieldControl: #Mandatory);
   Category @UI.Placeholder: '{i18n>Select}'@(Common.FieldControl: #Mandatory);
-  EvalConditions @UI.MultiLineText @UI.Placeholder: '{i18n>Enter Evaluation Conditions}';
+  EvaluationConditions @UI.MultiLineText @UI.Placeholder: '{i18n>Enter Evaluation Conditions}';
   createdAt @UI.Placeholder: '{i18n>CreatedAtPlaceholder}';
 };
 

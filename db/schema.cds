@@ -9,7 +9,8 @@ entity ConfigProduct : cuid, managed {
     Category    : String(50)  @title : 'Category';
     Priority    : String(20)  @title : 'Priority';
     createdAt   : DateTime   @title : 'Created On';
-    EvalConditions : String(255) @title : 'Evaluation Conditions';
+    GeneralInfo : DateTime   @title : 'Details';
+    EvaluationConditions : String(255) ;
 }
 
 entity FieldTypes {

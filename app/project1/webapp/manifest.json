@@ -176,7 +176,7 @@
                     }
                   }
                 },
-                "@com.sap.vocabularies.UI.v1.FieldGroup#EvalConditions": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#EvaluationConditions": {
                   "actions": {
                     "PasteButtonEnabled": {
                       "press": "project1.ext.controller.PasteButtonEnabled.PasteButtonEnabled",
@@ -263,6 +263,9 @@
           "sap.fe.templates.ObjectPage.ObjectPageController": {
             "controllerName": "project1.ext.controller.create"
           }
+        },
+        "sap.fe.templates.ListReport.ListReportController": {
+         "controllerName": "project1.ext.controller.DialogBox"
         }
       }
     }
